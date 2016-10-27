@@ -1,0 +1,30 @@
+{
+    "name": "sellsecure/reposter",
+    "description": "A library to simplify the communication with a HTTP RESTful API",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Raphael De Freitas",
+            "email": "raphael@de-freitas.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Reposter\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Reposter\\Tests\\": "tests"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "psr/http-message": "^1.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^1.9",
+        "phpunit/phpunit": "^5.6"
+    }
+}

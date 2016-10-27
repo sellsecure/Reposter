@@ -1,0 +1,18 @@
+language: php
+
+php:
+    - 5.6
+    - 7.0
+
+install:
+    - composer install --prefer-dist --no-interaction
+
+script:
+    - vendor/bin/phpunit --coverage-clover=coverage.xml
+    - vendor/bin/php-cs-fixer fix src --dry-run
+    - php coverage-checker.php coverage.xml 80
+
+after_script:
+    - wget https://scrutinizer-ci.com/ocular.phar
+    - php ocular.phar code-coverage:upload --format=php-clover coverage.xml
+
