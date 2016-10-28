@@ -12,6 +12,9 @@ use Reposter\Reposter;
  */
 class ReposterTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * Tests the constructor and properties.
+     */
     public function testConstructor()
     {
         $configuration = $this->prophesize(Configuration::class)->reveal();

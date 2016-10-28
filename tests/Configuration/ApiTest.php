@@ -37,6 +37,9 @@ class ApiTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('test_base_url', $api->getBaseUrl());
     }
 
+    /**
+     * Tests the property resourceMapping.
+     */
     public function testPropertyResourceMapping()
     {
         $api = new Api();
@@ -48,6 +51,9 @@ class ApiTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($resourceMappingLoader, $api->getResourceMapping());
     }
 
+    /**
+     * Tests the property logger.
+     */
     public function testPropertyLogger()
     {
         $api = new Api();

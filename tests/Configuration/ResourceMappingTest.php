@@ -81,6 +81,9 @@ class ResourceMappingTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($resourceMapping->hasAttribute('test_attribute'));
     }
 
+    /**
+     * Tests that setting attributes is doing well.
+     */
     public function testSetAttributes()
     {
         $resourceMapping = new ResourceMapping();

@@ -15,21 +15,6 @@ use Reposter\Exception\InvalidArgumentException;
 class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @param $name
-     * @param array $logger
-     *
-     * @return object
-     */
-    public function createApiMock($name, $logger = [null, null])
-    {
-        $apiProphecy = $this->prophesize(Api::class);
-
-        $apiProphecy->getName()->willReturn($name);
-
-        return $apiProphecy;
-    }
-
-    /**
      * Tests the property DefaultLogger.
      */
     public function testPropertyDefaultLogger()
