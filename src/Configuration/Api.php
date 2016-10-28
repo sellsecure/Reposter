@@ -33,11 +33,11 @@ class Api
     private $baseUrl;
 
     /**
-     * Contains the resource mapping loader.
+     * Contains the resource mapping.
      *
-     * @var ResourceMapping\LoaderInterface
+     * @var ResourceMapping
      */
-    private $resourceMappingLoader;
+    private $resourceMapping;
 
     /**
      * Gets the logger.
@@ -112,25 +112,25 @@ class Api
     }
 
     /**
-     * Gets the resource mapping loader.
+     * Gets the resource mapping.
      *
-     * @return ResourceMapping\LoaderInterface
+     * @return ResourceMapping
      */
-    public function getResourceMappingLoader()
+    public function getResourceMapping()
     {
-        return $this->resourceMappingLoader;
+        return $this->resourceMapping;
     }
 
     /**
-     * Sets the resource mapping loader.
+     * Sets the resource mapping.
      *
-     * @param ResourceMapping\LoaderInterface $resourceMappingLoader
+     * @param ResourceMapping $resourceMapping
      *
      * @return $this
      */
-    public function setResourceMappingLoader(ResourceMapping\LoaderInterface $resourceMappingLoader)
+    public function setResourceMapping(ResourceMapping $resourceMapping)
     {
-        $this->resourceMappingLoader = $resourceMappingLoader;
+        $this->resourceMapping = $resourceMapping;
 
         return $this;
     }

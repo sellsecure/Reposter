@@ -4,7 +4,7 @@ namespace Reposter\tests\Configuration;
 
 use Psr\Log\LoggerInterface;
 use Reposter\Configuration\Api;
-use Reposter\Configuration\ResourceMapping\LoaderInterface;
+use Reposter\Configuration\ResourceMapping;
 
 /**
  * Class ApiTest.
@@ -37,15 +37,15 @@ class ApiTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('test_base_url', $api->getBaseUrl());
     }
 
-    public function testPropertyResourceMappingLoader()
+    public function testPropertyResourceMapping()
     {
         $api = new Api();
 
-        $resourceMappingLoader = $this->prophesize(LoaderInterface::class)->reveal();
+        $resourceMappingLoader = $this->prophesize(ResourceMapping::class)->reveal();
 
-        $fluent = $api->setResourceMappingLoader($resourceMappingLoader);
+        $fluent = $api->setResourceMapping($resourceMappingLoader);
         $this->assertSame($api, $fluent);
-        $this->assertSame($resourceMappingLoader, $api->getResourceMappingLoader());
+        $this->assertSame($resourceMappingLoader, $api->getResourceMapping());
     }
 
     public function testPropertyLogger()
