@@ -14,11 +14,11 @@ use Reposter\Exception\InvalidArgumentException;
 class Configuration
 {
     /**
-     * Contains the logger.
+     * Contains the default logger.
      *
      * @var LoggerInterface
      */
-    private $logger;
+    private $defaultLogger;
 
     /**
      * Contains the APis.
@@ -28,25 +28,25 @@ class Configuration
     private $apis = [];
 
     /**
-     * Gets the logger.
+     * Gets the default logger.
      *
      * @return LoggerInterface
      */
-    public function getLogger()
+    public function getDefaultLogger()
     {
-        return $this->logger ?: new NullLogger();
+        return $this->defaultLogger ?: new NullLogger();
     }
 
     /**
-     * Sets the logger.
+     * Sets the default logger.
      *
-     * @param LoggerInterface $logger
+     * @param LoggerInterface $defaultLogger
      *
      * @return $this
      */
-    public function setLogger(LoggerInterface $logger)
+    public function setDefaultLogger(LoggerInterface $defaultLogger)
     {
-        $this->logger = $logger;
+        $this->defaultLogger = $defaultLogger;
 
         return $this;
     }
@@ -71,6 +71,11 @@ class Configuration
         }
 
         $this->apis[$api->getName()] = $api;
+
+        // Adds the default logger into the added API
+        if ($api->getLogger() === null) {
+            $api->setLogger($this->getDefaultLogger());
+        }
 
         return $this;
     }

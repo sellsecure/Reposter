@@ -14,26 +14,70 @@ use Reposter\Exception\InvalidArgumentException;
  */
 class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
-    public function testPropertyLogger()
+    /**
+     * @param $name
+     * @param array $logger
+     *
+     * @return object
+     */
+    public function createApiMock($name, $logger = [null, null])
+    {
+        $apiProphecy = $this->prophesize(Api::class);
+
+        $apiProphecy->getName()->willReturn($name);
+
+        return $apiProphecy;
+    }
+
+    /**
+     * Tests the property DefaultLogger.
+     */
+    public function testPropertyDefaultLogger()
     {
         $configuration = new Configuration();
 
         $logger = $this->prophesize(LoggerInterface::class)->reveal();
 
-        $fluent = $configuration->setLogger($logger);
+        $fluent = $configuration->setDefaultLogger($logger);
         $this->assertSame($configuration, $fluent);
-        $this->assertSame($logger, $configuration->getLogger());
+        $this->assertSame($logger, $configuration->getDefaultLogger());
     }
 
     /**
-     * Tests that the API is successfully added.
+     * Tests that the API is successfully added with logger.
      */
-    public function testAddApiSuccessfully()
+    public function testAddApiWithLogger()
     {
         $configuration = new Configuration();
 
+        $logger = $this->prophesize(LoggerInterface::class)->reveal();
+        $configuration->setDefaultLogger($logger);
+
         $api = $this->prophesize(Api::class)
             ->getName()->willReturn('test_api')->getObjectProphecy()
+            ->getLogger()->willReturn(null)->shouldBeCalled()->getObjectProphecy()
+            ->setLogger($logger)->shouldBeCalled()->getObjectProphecy()
+            ->reveal();
+
+        $fluent = $configuration->addApi($api);
+        $this->assertEquals($configuration, $fluent);
+
+        $this->assertEquals($api, $configuration->getApi('test_api'));
+        $this->assertContains($api, $configuration->getApis());
+    }
+
+    /**
+     * Tests that the API is successfully added without logger.
+     */
+    public function testAddApiWithoutLogger()
+    {
+        $configuration = new Configuration();
+
+        $logger = $this->prophesize(LoggerInterface::class)->reveal();
+
+        $api = $this->prophesize(Api::class)
+            ->getName()->willReturn('test_api')->getObjectProphecy()
+            ->getLogger()->willReturn($logger)->getObjectProphecy()
             ->reveal();
 
         $fluent = $configuration->addApi($api);
@@ -52,6 +96,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
         $api = $this->prophesize(Api::class)
             ->getName()->willReturn('test_api')->getObjectProphecy()
+            ->getLogger()->willReturn($this->prophesize(LoggerInterface::class)->reveal())->getObjectProphecy()
             ->reveal();
 
         $configuration->addApi($api);
@@ -69,9 +114,11 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
         $api1 = $this->prophesize(Api::class)
             ->getName()->willReturn('test_api')->getObjectProphecy()
+            ->getLogger()->willReturn($this->prophesize(LoggerInterface::class)->reveal())->getObjectProphecy()
             ->reveal();
         $api2 = $this->prophesize(Api::class)
             ->getName()->willReturn('test_api')->getObjectProphecy()
+            ->getLogger()->willReturn($this->prophesize(LoggerInterface::class)->reveal())->getObjectProphecy()
             ->reveal();
 
         $configuration->addApi($api1);
@@ -89,6 +136,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
         $api = $this->prophesize(Api::class)
             ->getName()->willReturn('test_api')->getObjectProphecy()
+            ->getLogger()->willReturn($this->prophesize(LoggerInterface::class)->reveal())->getObjectProphecy()
             ->reveal();
 
         $this->assertNull($configuration->getApi('test_api'));
@@ -116,6 +164,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
         $api = $this->prophesize(Api::class)
             ->getName()->willReturn('test_api')->getObjectProphecy()
+            ->getLogger()->willReturn($this->prophesize(LoggerInterface::class)->reveal())->getObjectProphecy()
             ->reveal();
 
         $this->assertCount(0, $configuration->getApis());
@@ -133,6 +182,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
         $api = $this->prophesize(Api::class)
             ->getName()->willReturn('test_api')->getObjectProphecy()
+            ->getLogger()->willReturn($this->prophesize(LoggerInterface::class)->reveal())->getObjectProphecy()
             ->reveal();
 
         $configuration->addApi($api);

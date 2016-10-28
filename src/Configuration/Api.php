@@ -2,6 +2,8 @@
 
 namespace Reposter\Configuration;
 
+use Psr\Log\LoggerInterface;
+
 /**
  * Class Api.
  *
@@ -9,6 +11,13 @@ namespace Reposter\Configuration;
  */
 class Api
 {
+    /**
+     * Contains the logger.
+     *
+     * @var LoggerInterface
+     */
+    private $logger;
+
     /**
      * Contains the name.
      *
@@ -22,6 +31,37 @@ class Api
      * @var string
      */
     private $baseUrl;
+
+    /**
+     * Contains the resource mapping loader.
+     *
+     * @var ResourceMapping\LoaderInterface
+     */
+    private $resourceMappingLoader;
+
+    /**
+     * Gets the logger.
+     *
+     * @return LoggerInterface
+     */
+    public function getLogger()
+    {
+        return $this->logger;
+    }
+
+    /**
+     * Sets the logger.
+     *
+     * @param LoggerInterface $logger
+     *
+     * @return $this
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+
+        return $this;
+    }
 
     /**
      * Gets the name.
@@ -67,6 +107,30 @@ class Api
     public function setBaseUrl($baseUrl)
     {
         $this->baseUrl = $baseUrl;
+
+        return $this;
+    }
+
+    /**
+     * Gets the resource mapping loader.
+     *
+     * @return ResourceMapping\LoaderInterface
+     */
+    public function getResourceMappingLoader()
+    {
+        return $this->resourceMappingLoader;
+    }
+
+    /**
+     * Sets the resource mapping loader.
+     *
+     * @param ResourceMapping\LoaderInterface $resourceMappingLoader
+     *
+     * @return $this
+     */
+    public function setResourceMappingLoader(ResourceMapping\LoaderInterface $resourceMappingLoader)
+    {
+        $this->resourceMappingLoader = $resourceMappingLoader;
 
         return $this;
     }
