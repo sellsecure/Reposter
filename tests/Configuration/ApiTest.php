@@ -12,13 +12,26 @@ use Reposter\Configuration\Api;
 class ApiTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Tests that we get the correct information as constructor arguments.
+     * Tests the property name.
      */
-    public function testConstructor()
+    public function testPropertyName()
     {
-        $api = new Api('test_api', 'test_base_URL');
+        $api = new Api();
 
+        $fluent = $api->setName('test_api');
+        $this->assertSame($api, $fluent);
         $this->assertSame('test_api', $api->getName());
-        $this->assertSame('test_base_URL', $api->getBaseUrl());
+    }
+
+    /**
+     * Tests the property baseUrl.
+     */
+    public function testPropertyBaseUrl()
+    {
+        $api = new Api();
+
+        $fluent = $api->setBaseUrl('test_base_url');
+        $this->assertSame($api, $fluent);
+        $this->assertSame('test_base_url', $api->getBaseUrl());
     }
 }

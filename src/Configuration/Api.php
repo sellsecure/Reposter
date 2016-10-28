@@ -24,18 +24,6 @@ class Api
     private $baseUrl;
 
     /**
-     * Constructor.
-     *
-     * @param string $name
-     * @param string $baseUrl
-     */
-    public function __construct($name, $baseUrl)
-    {
-        $this->name = $name;
-        $this->baseUrl = $baseUrl;
-    }
-
-    /**
      * Gets the name.
      *
      * @return string
@@ -46,6 +34,20 @@ class Api
     }
 
     /**
+     * Sets the name.
+     *
+     * @param string $name
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
      * Gets the base URL.
      *
      * @return string
@@ -53,5 +55,19 @@ class Api
     public function getBaseUrl()
     {
         return $this->baseUrl;
+    }
+
+    /**
+     * Sets the base URL.
+     *
+     * @param string $baseUrl
+     *
+     * @return $this
+     */
+    public function setBaseUrl($baseUrl)
+    {
+        $this->baseUrl = $baseUrl;
+
+        return $this;
     }
 }
