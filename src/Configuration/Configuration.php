@@ -2,6 +2,8 @@
 
 namespace Reposter\Configuration;
 
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Reposter\Exception\InvalidArgumentException;
 
 /**
@@ -12,11 +14,42 @@ use Reposter\Exception\InvalidArgumentException;
 class Configuration
 {
     /**
+     * Contains the logger.
+     *
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
      * Contains the APis.
      *
      * @var Api[]
      */
     private $apis = [];
+
+    /**
+     * Gets the logger.
+     *
+     * @return LoggerInterface
+     */
+    public function getLogger()
+    {
+        return $this->logger ?: new NullLogger();
+    }
+
+    /**
+     * Sets the logger.
+     *
+     * @param LoggerInterface $logger
+     *
+     * @return $this
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+
+        return $this;
+    }
 
     /**
      * Adds an API.

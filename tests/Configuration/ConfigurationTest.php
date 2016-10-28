@@ -2,6 +2,7 @@
 
 namespace Reposter\tests\Configuration;
 
+use Psr\Log\LoggerInterface;
 use Reposter\Configuration\Api;
 use Reposter\Configuration\Configuration;
 use Reposter\Exception\InvalidArgumentException;
@@ -13,6 +14,17 @@ use Reposter\Exception\InvalidArgumentException;
  */
 class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
+    public function testPropertyLogger()
+    {
+        $configuration = new Configuration();
+
+        $logger = $this->prophesize(LoggerInterface::class)->reveal();
+
+        $fluent = $configuration->setLogger($logger);
+        $this->assertSame($configuration, $fluent);
+        $this->assertSame($logger, $configuration->getLogger());
+    }
+
     /**
      * Tests that the API is successfully added.
      */
