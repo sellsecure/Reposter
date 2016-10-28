@@ -1,5 +1,7 @@
 # Reposter
 
+[![Join the chat at https://gitter.im/sellsecure/Reposter](https://badges.gitter.im/sellsecure/Reposter.svg)](https://gitter.im/sellsecure/Reposter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/f6f3ce01-ee54-478b-b095-f47774c86ec1/mini.png)](https://insight.sensiolabs.com/projects/f6f3ce01-ee54-478b-b095-f47774c86ec1)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sellsecure/reposter/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sellsecure/reposter/?branch=master)
 [![Build Status](https://travis-ci.org/sellsecure/Reposter.svg?branch=master)](https://travis-ci.org/sellsecure/Reposter)
