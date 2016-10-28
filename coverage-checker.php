@@ -29,9 +29,10 @@ foreach ($classes as $class) {
 
 $coveragePercentage = $totalElements === 0 ? 100 : ($totalCoveredElements / $totalElements) * 100;
 
+echo "Code coverage is $coveragePercentage% - ";
 if ($coveragePercentage < $percentage) {
-    echo 'Code coverage is '.$coveragePercentage.'%, which is below the accepted '.$percentage.'%'.PHP_EOL;
+    echo "\033[1;31mKO\033[0m (below $percentage)".PHP_EOL;
     exit(1);
 }
 
-echo 'Code coverage is '.$coveragePercentage.'% - OK!'.PHP_EOL;
+echo "\033[1;32mOK\033[0m".PHP_EOL;
