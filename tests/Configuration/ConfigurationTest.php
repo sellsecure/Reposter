@@ -25,7 +25,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
         $fluent = $configuration->setDefaultLogger($logger);
         $this->assertSame($configuration, $fluent);
-        $this->assertSame($logger, $configuration->getDefaultLogger());
+        $this->assertSame($logger, $configuration->getLogger());
     }
 
     /**
