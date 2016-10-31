@@ -6,6 +6,7 @@ use Psr\Log\LoggerInterface;
 use Reposter\Configuration\Api;
 use Reposter\Configuration\Configuration;
 use Reposter\Exception\InvalidArgumentException;
+use Reposter\Http\Client\HttpClientInterface;
 
 /**
  * Class ConfigurationTest.
@@ -15,17 +16,28 @@ use Reposter\Exception\InvalidArgumentException;
 class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Tests the property DefaultLogger.
+     * Tests the property Logger.
      */
-    public function testPropertyDefaultLogger()
+    public function testPropertyLogger()
     {
         $configuration = new Configuration();
 
         $logger = $this->prophesize(LoggerInterface::class)->reveal();
 
-        $fluent = $configuration->setDefaultLogger($logger);
+        $fluent = $configuration->setLogger($logger);
         $this->assertSame($configuration, $fluent);
         $this->assertSame($logger, $configuration->getLogger());
+    }
+
+    public function testPropertyHttpClient()
+    {
+        $configuration = new Configuration();
+
+        $httpClient = $this->prophesize(HttpClientInterface::class)->reveal();
+
+        $fluent = $configuration->setHttpClient($httpClient);
+        $this->assertSame($configuration, $fluent);
+        $this->assertSame($httpClient, $configuration->getHttpClient());
     }
 
     /**

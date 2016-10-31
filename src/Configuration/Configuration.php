@@ -5,6 +5,7 @@ namespace Reposter\Configuration;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Reposter\Exception\InvalidArgumentException;
+use Reposter\Http\Client\HttpClientInterface;
 
 /**
  * Class Configuration.
@@ -19,6 +20,13 @@ class Configuration
      * @var LoggerInterface
      */
     private $logger;
+
+    /**
+     * Contains the HTTP client.
+     *
+     * @var HttpClientInterface
+     */
+    private $httpClient;
 
     /**
      * Contains the APis.
@@ -44,9 +52,33 @@ class Configuration
      *
      * @return $this
      */
-    public function setDefaultLogger(LoggerInterface $logger)
+    public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
+
+        return $this;
+    }
+
+    /**
+     * Gets the httpClient.
+     *
+     * @return HttpClientInterface
+     */
+    public function getHttpClient()
+    {
+        return $this->httpClient;
+    }
+
+    /**
+     * Sets the httpClient.
+     *
+     * @param HttpClientInterface $httpClient
+     *
+     * @return $this
+     */
+    public function setHttpClient(HttpClientInterface $httpClient)
+    {
+        $this->httpClient = $httpClient;
 
         return $this;
     }
