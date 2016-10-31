@@ -7,6 +7,7 @@ use Reposter\Configuration\Api;
 use Reposter\Configuration\Configuration;
 use Reposter\Exception\InvalidArgumentException;
 use Reposter\Http\Client\HttpClientInterface;
+use Reposter\Http\Message\HttpMessageFactoryInterface;
 
 /**
  * Class ConfigurationTest.
@@ -29,6 +30,9 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($logger, $configuration->getLogger());
     }
 
+    /**
+     * Tests the property HttpClient.
+     */
     public function testPropertyHttpClient()
     {
         $configuration = new Configuration();
@@ -41,6 +45,20 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests the property HttpMessageFactory.
+     */
+    public function testPropertyHttpMessageFactory()
+    {
+        $configuration = new Configuration();
+
+        $httpMessageFactory = $this->prophesize(HttpMessageFactoryInterface::class)->reveal();
+
+        $fluent = $configuration->setHttpMessageFactory($httpMessageFactory);
+        $this->assertSame($configuration, $fluent);
+        $this->assertSame($httpMessageFactory, $configuration->getHttpMessageFactory());
+    }
+
+    /**
      * Tests that the API is successfully added with logger.
      */
     public function testAddApiWithLogger()
@@ -48,7 +66,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $configuration = new Configuration();
 
         $logger = $this->prophesize(LoggerInterface::class)->reveal();
-        $configuration->setDefaultLogger($logger);
+        $configuration->setLogger($logger);
 
         $api = $this->prophesize(Api::class)
             ->getName()->willReturn('test_api')->getObjectProphecy()

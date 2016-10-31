@@ -6,6 +6,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Reposter\Exception\InvalidArgumentException;
 use Reposter\Http\Client\HttpClientInterface;
+use Reposter\Http\Message\HttpMessageFactoryInterface;
 
 /**
  * Class Configuration.
@@ -27,6 +28,13 @@ class Configuration
      * @var HttpClientInterface
      */
     private $httpClient;
+
+    /**
+     * Contains the HTTP message factory.
+     *
+     * @var HttpMessageFactoryInterface
+     */
+    private $httpMessageFactory;
 
     /**
      * Contains the APis.
@@ -79,6 +87,30 @@ class Configuration
     public function setHttpClient(HttpClientInterface $httpClient)
     {
         $this->httpClient = $httpClient;
+
+        return $this;
+    }
+
+    /**
+     * Gets the HTTP message factory.
+     *
+     * @return HttpMessageFactoryInterface
+     */
+    public function getHttpMessageFactory()
+    {
+        return $this->httpMessageFactory;
+    }
+
+    /**
+     * Sets the HTTP message factory.
+     *
+     * @param HttpMessageFactoryInterface $httpMessageFactory
+     *
+     * @return $this
+     */
+    public function setHttpMessageFactory(HttpMessageFactoryInterface $httpMessageFactory)
+    {
+        $this->httpMessageFactory = $httpMessageFactory;
 
         return $this;
     }
